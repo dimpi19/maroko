@@ -7,20 +7,30 @@ function BestProducts() {
     const [text, setText] = useState([]);
     const [text1, setText1] = useState([]);
 
-    useEffect(() => {
-        fetchapi();
-    }, []);
+   useEffect(() => {
+    fetchapi();
+}, []);
 
-    const fetchapi = async () => {
-        const api = await axios.get("http://localhost:3000/BestSale");
-        setState(api.data);
+const fetchapi = async () => {
+    try {
+        // 🔹 Public folder JSON path
+        const api = await axios.get("/db.json");
 
-        const api1 = await axios.get("http://localhost:3000/NewArrival");
-        setText(api1.data);
+        // 🔹 Assuming db.json structure
+        // {
+        //   "BestSale": [...],
+        //   "NewArrival": [...],
+        //   "TopRated": [...]
+        // }
+        setState(api.data.BestSale);
+        setText(api.data.NewArrival);
+        setText1(api.data.TopRated);
 
-        const api2 = await axios.get("http://localhost:3000/TopRated");
-        setText1(api2.data);
-    };
+    } catch (error) {
+        console.error("Error fetching data:", error);
+    }
+};
+
 
     const boxStyle = {
         display: "flex",

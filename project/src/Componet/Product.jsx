@@ -18,8 +18,13 @@ function Product() {
   }, [])
 
   const fetchapi = async () => {
-    const api = await axios.get("http://localhost:3000/NewArrival")
-    setState(api.data)
+    try {
+      // 🔹 Public folder compatible path for Netlify
+      const api = await axios.get("/db.json")
+      setState(api.data.NewArrival)   // 🔹 assuming db.json has { "NewArrival": [ ... ] }
+    } catch (err) {
+      console.error("Error fetching data:", err)
+    }
   }
 
   return (

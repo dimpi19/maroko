@@ -7,21 +7,26 @@ import 'aos/dist/aos.css'
 function Product() {
   const [state, setState] = useState([])
 
-  useEffect(() => {
-    fetchapi()
-    AOS.init({
-      duration: 1000,
-      offset: 100,
-      easing: 'ease-in-out',
-      once: true,
-    })
-  }, [])
+ useEffect(() => {
+  fetchapi()
+  AOS.init({
+    duration: 1000,
+    offset: 100,
+    easing: 'ease-in-out',
+    once: true,
+  })
+}, [])
 
-  const fetchapi = async () => {
-    const api = await axios.get("http://localhost:3000/BestSale")
-    setState(api.data)
+const fetchapi = async () => {
+  try {
+    // 🔹 Netlify / Public folder compatible path
+    const api = await axios.get("/db.json")  
+    // 🔹 assuming db.json has { "BestSale": [ ... ] }
+    setState(api.data.BestSale)  
+  } catch (err) {
+    console.error("Error fetching data:", err)
   }
-
+}
   return (
     <div className="container text-center my-5">
 

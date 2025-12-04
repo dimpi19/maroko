@@ -12,16 +12,27 @@ const ProductInfo = () => {
   const navigate = useNavigate();
   const { category, id } = useParams();
 
-  useEffect(() => {
-    fetchapi();
-  }, [category, id]);
+useEffect(() => {
+  fetchapi();
+}, [category, id]);
 
-  async function fetchapi() {
-    const info = await axios.get(`http://localhost:3000/${category}/${id}`);
-    const detail = await axios.get(`http://localhost:3000/${category}`);
-    setState(info.data);
-    setRelated(detail.data);
+async function fetchapi() {
+  try {
+    // 🔹 Fetch the entire db.json from public folder
+    const res = await axios.get("/db.json");
+
+    // 🔹 Access the specific item by category & id
+    const categoryData = res.data[category] || [];
+    const itemDetail = categoryData.find(item => item.id === id);
+
+    setState(itemDetail || {});      // 🔹 set single product detail
+    setRelated(categoryData);         // 🔹 set all products in the category for related items
+
+  } catch (error) {
+    console.error("Error fetching data:", error);
   }
+}
+
 
   const filterCategory = related.filter(
     (itm) => itm.category === state.category && itm.id !== state.id

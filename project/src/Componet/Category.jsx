@@ -11,18 +11,30 @@ const Category = () => {
   const [sort, setSort] = useState("default");
   const { category } = useParams();
 
-  useEffect(() => {
-    AOS.init({ duration: 1000, once: true });
-    async function fetchapi() {
-      try {
-        const info = await axios.get(`http://localhost:3000/${category}`);
-        setState(info.data);
-      } catch (error) {
-        console.error("Error fetching category:", error);
+ useEffect(() => {
+  AOS.init({ duration: 1000, once: true });
+
+  async function fetchapi() {
+    try {
+      // 🔹 Netlify / public folder compatible path
+      const info = await axios.get(`/db.json`);
+      
+      // 🔹 assuming db.json has multiple categories as arrays
+      // Example: { "NewArrival": [...], "BestSale": [...] }
+      if (info.data[category]) {
+        setState(info.data[category]);
+      } else {
+        console.warn(`Category "${category}" not found in db.json`);
+        setState([]);
       }
+    } catch (error) {
+      console.error("Error fetching category:", error);
     }
-    fetchapi();
-  }, [category]);
+  }
+
+  fetchapi();
+}, [category]);
+
 
   const filteredProducts = [];
 
