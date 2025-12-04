@@ -98,20 +98,8 @@ const fetchapi = async () => {
             textAlign: "left"
           }}
         >
-          <h1 data-aos="fade-right">NEW WOMEN COLLECTION</h1>
-          <h1 data-aos="fade-left">
-            START AT{" "}
-            <span
-              style={{
-                backgroundColor: "#FF5A5A",
-                padding: "5px 12px",
-                borderRadius: "5px",
-                color: "white",
-              }}
-            >
-              $70.00
-            </span>
-          </h1>
+          <h1>NEW WOMEN COLLECTION</h1>
+          
         </div>
       </div>
 

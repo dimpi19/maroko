@@ -31,7 +31,6 @@ const fetchapi = async () => {
     }
 };
 
-
     const boxStyle = {
         display: "flex",
         alignItems: "center",
