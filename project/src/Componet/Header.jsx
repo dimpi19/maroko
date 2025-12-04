@@ -31,11 +31,11 @@ function Header() {
 
             {/* Left Menu */}
             <Nav className="me-auto" style={{ display: "flex", gap: "30px" }}>
-                <Nav.Link href="/">Home</Nav.Link>
-                <Nav.Link href="/shop">Shop</Nav.Link>
-                <Nav.Link href="/blog">Blog</Nav.Link>
-                <Nav.Link href="/about">About Us</Nav.Link>
-                <Nav.Link href="/contact">Contact</Nav.Link>
+                <Nav.Link href="/" to="/home">Home</Nav.Link>
+                <Nav.Link href="/">Shop</Nav.Link>
+                <Nav.Link href="/">Blog</Nav.Link>
+                <Nav.Link href="/">About Us</Nav.Link>
+                <Nav.Link href="/">Contact</Nav.Link>
             </Nav>
 
             {/* Right icons */}

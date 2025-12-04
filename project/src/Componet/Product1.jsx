@@ -84,7 +84,6 @@ const fetchapi = async () => {
         <img
           src="https://maroko-demo.myshopify.com/cdn/shop/files/add_banner_img_1920x.webp?v=1683534853"
           className="img-fluid rounded w-100"
-          style={{ maxHeight: "450px", objectFit: "cover" }}
           alt="Banner"
         />
 
